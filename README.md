@@ -15,7 +15,7 @@ K-reciprocal Encoding
 - mAP = 0.1025 using Euclidean Distance w/o Re-ranking
 
 ## Problems to resolve
-- There are some parts in the [original code](https://github.com/zhunzhong07/person-re-ranking/blob/master/python-version/re_ranking_ranklist.py) from the authors which I do not understand. 
+- There are some parts in the [original code](https://github.com/zhunzhong07/person-re-ranking/blob/master/python-version/re_ranking_ranklist.py) which I do not understand. 
 - Those parts are not implemented in my code. Hence my implementation is a little but faster, but the performace is quite worse.
 - mAP = 0.2182 using Euclidean Distance w the original code
 
