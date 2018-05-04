@@ -1,0 +1,13 @@
+.DS_Store
+data/
+__pycache__/
+checkpoint/
+result/
+log/
+*.pages
+*.docx
+*.png
+*.npy
+*.h5
+*.ckpt
+*.tar.gz
