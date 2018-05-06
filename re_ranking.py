@@ -1,13 +1,10 @@
 #! python3
 
-import _pickle
 import numpy as np
-import my_util
-from sklearn.metrics.pairwise import euclidean_distances
 
-class K_Recirpocal_Encoding():
+class K_Reciprocal_Encoding():
 
-    def __init__(self, k1=20, distance_function=euclidean_distances):
+    def __init__(self, distance_function, k1=20):
         self.k1 = k1
         self.R_star_threshold = 2./3.
 
@@ -59,9 +56,8 @@ class K_Recirpocal_Encoding():
                 V[i] /= s
         return V
 
-    def fit(self, gallery_X, gallery_Y, verbose=True):
+    def fit(self, gallery_X, verbose=True):
         self.gallery_X = gallery_X
-        self.gallery_Y = gallery_Y
         self.n_gallery, self.n_feature = gallery_X.shape
 
         print('[*] Compute the distance matrix within Gallery')
@@ -87,12 +83,9 @@ class K_Recirpocal_Encoding():
         print('[*] Compute V within Gallery')
         self.GG_V = self.compute_V(self.GG_R_star, GG_sim)
         
-    def predict(self, query_X, k2=6, mu=0.3):
+    def metric(self, query_X, k2=6):
         print('[*] Compute the distance matrix between Query(Probe) and Gallery')
         QG_dist = self.distance_function(query_X, self.gallery_X)
-
-        if mu == 0:
-            return predict_by_distance(QG_dist, self.gallery_Y)
 
         n_query = query_X.shape[0]
         
@@ -142,5 +135,4 @@ class K_Recirpocal_Encoding():
             
         Jaccard_dist = 1. - np.divide(intersect, 2. - intersect)
 
-        distance_matrix = (1-mu) * QG_dist + mu * Jaccard_dist
-        return my_util.predict_by_distance(distance_matrix, self.gallery_Y)
+        return Jaccard_dist
